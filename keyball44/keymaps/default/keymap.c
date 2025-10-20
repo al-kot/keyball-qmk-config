@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VOL_UP KC_KB_VOLUME_UP
 #define VOL_DN KC_KB_VOLUME_DOWN
 #define SF_BS MT(MOD_RSFT, KC_BSPC)
-#define CAG_BIT MOD_BIT(KC_LCTL) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI)
+// #define CAG_BIT MOD_BIT(KC_LCTL) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI)
 #define LCAG_NAV LT(NAV, KC_NO)
 #define GUI_BSPC MT(MOD_RGUI, KC_BSPC)
 #define NUM_SPC LT(NUM,KC_SPC)
@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
       RGB_RMOD  ,   RGB_MOD   ,    KC_F7    ,    KC_F8    ,    KC_F9    ,   KC_F10    ,       KC_BRMD   ,   KC_BRMU   ,   KC_VOLU   ,   KC_VOLD   ,   XXXXXXX   ,   QK_BOOT   ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-      RGB_HUD   ,   RGB_HUI   ,    KC_F4    ,    KC_F5    ,    KC_F6    ,   KC_F11    ,       KC_LEFT   ,   KC_DOWN   ,    KC_UP    ,   KC_RGHT   ,   XXXXXXX   ,   XXXXXXX   ,
+      RGB_HUD   ,   RGB_HUI   ,    KC_F4    ,    KC_F5    ,    KC_F6    ,   KC_F11    ,       KC_LEFT   ,   KC_DOWN   ,    KC_UP    ,   KC_RGHT   ,   XXXXXXX   ,   KC_ENT    ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
       RGB_TOG   ,   XXXXXXX   ,    KC_F1    ,    KC_F2    ,    KC_F3    ,   KC_F12    ,       XXXXXXX   ,   KC_BTN4   ,   KC_BTN5   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,
 //╰─────────────┴─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
@@ -70,11 +70,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
       XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,       XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-      XXXXXXX   ,    KC_6     ,    KC_4     ,     KC_2    ,    KC_0     ,   XXXXXXX   ,       XXXXXXX   ,     KC_1    ,     KC_3    ,     KC_5    ,     KC_7    ,   XXXXXXX   ,
+      KC_ESC    ,    KC_6     ,    KC_4     ,     KC_2    ,    KC_0     ,   XXXXXXX   ,       XXXXXXX   ,     KC_1    ,     KC_3    ,     KC_5    ,     KC_7    ,   KC_ENT    ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
       XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,    KC_8     ,   XXXXXXX   ,       XXXXXXX   ,     KC_9    ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,
 //╰─────────────┴─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                    XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,       KC_BSPC   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX
+                    XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX   ,       KC_BSPC   ,   KC_SPC    ,   XXXXXXX   ,   XXXXXXX   ,   XXXXXXX
 //              ╰─────────────┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────╯                           ╰─────────────╯
   ),
 
@@ -120,7 +120,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         case LCAG_NAV:
             if (record->tap.count > 0) {
                 if (record->event.pressed) {
-                    register_mods(CAG_BIT);
+                    set_oneshot_mods(MOD_LCTL | MOD_LALT | MOD_LGUI);
                 }
                 return false;
             }
@@ -148,14 +148,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     return true;
 }
 
-void post_process_record_user(uint16_t keycode, keyrecord_t* record) {
-    if (keycode != LCAG_NAV &&
-        keycode != OSM(MOD_LSFT) &&
-        keycode != NUM_SPC &&
-        (get_mods() & (CAG_BIT)) == (CAG_BIT)) {
-        unregister_mods(CAG_BIT);
-    }
-}
+// void post_process_record_user(uint16_t keycode, keyrecord_t* record) {
+//     if (keycode != LCAG_NAV &&
+//         keycode != OSM(MOD_LSFT) &&
+//         // keycode != NUM_SPC &&
+//         (get_mods() & (CAG_BIT)) == (CAG_BIT)) {
+//         unregister_mods(CAG_BIT);
+//     }
+// }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     // Auto enable scroll mode when the highest layer is 3
