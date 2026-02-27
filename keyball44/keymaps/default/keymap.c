@@ -51,6 +51,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define HMQ_K RCTL_T(KC_K)
 #define HMQ_L RALT_T(KC_L)
 
+#define CAG C(A(KC_LGUI))
+#define HA(kc) LALT_T(kc)
+#define HC(kc) LCTL_T(kc)
+#define HS(kc) LSFT_T(kc)
+#define HG(kc) LGUI_T(kc)
+
 // enum custom_keycodes {
 //     SCRL_TOG = KEYBALL_SAFE_RANGE,
 // };
@@ -62,11 +68,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
       KC_TAB    ,    KC_Q     ,    KC_W     ,    KC_F     ,    KC_P     ,    KC_G     ,        KC_J     ,    KC_L     ,    KC_U     ,    KC_Y     ,   KC_QUOT   ,    QK_REP   ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-      KC_ESC    ,    HM_A     ,    HM_R     ,    HM_S     ,    HM_T     ,    KC_D     ,        KC_H     ,    HM_N     ,    HM_E     ,    HM_I     ,     HM_O    ,    KC_ENT   ,
+      KC_ESC    ,   HG(KC_A)  ,   HA(KC_R)  ,   HC(KC_S)  ,   HS(KC_T)  ,    KC_D     ,        KC_H     ,   HS(KC_N)  ,   HC(KC_E)  ,   HA(KC_I)  ,   HG(KC_O)  ,    KC_ENT   ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
       CW_TOGG   ,    KC_Z     ,    KC_X     ,    KC_C     ,    KC_V     ,    KC_B     ,        KC_K     ,    KC_M     ,   KC_COMM   ,    KC_DOT   ,   KC_SLSH   ,    KC_UNDS  ,
 //╰─────────────┴─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                    TO(GAME)  ,  DF(QUERTY) ,   OSL(SYM)  ,   NUM_SPC   ,OSM(MOD_LSFT),    OSM(MOD_RALT),   BSPC_NAV  ,   XXXXXXX   ,   XXXXXXX   ,   TO(BASE)
+                    TO(GAME)  ,  DF(QUERTY) ,   OSL(SYM)  ,   NUM_SPC   ,     CAG     ,       KC_ENT    ,   BSPC_NAV  ,   XXXXXXX   ,   XXXXXXX   ,   TO(BASE)
 //              ╰─────────────┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────╯                           ╰─────────────╯
   ),
 //   [BASE] = LAYOUT_universal( // BASE
